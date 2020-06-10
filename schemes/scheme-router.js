@@ -1,8 +1,8 @@
 const express = require('express');
-
 const Schemes = require('./scheme-model.js');
-
-const router = express.Router();
+const router = express.Router({
+  mergeParams: true,
+});
 
 router.get('/', (req, res) => {
   Schemes.find()
@@ -26,6 +26,7 @@ router.get('/:id', (req, res) => {
     }
   })
   .catch(err => {
+    console.log(err)
     res.status(500).json({ message: 'Failed to get schemes' });
   });
 });
@@ -42,6 +43,7 @@ router.get('/:id/steps', (req, res) => {
     }
   })
   .catch(err => {
+    console.log(err)
     res.status(500).json({ message: 'Failed to get steps' });
   });
 });
