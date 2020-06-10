@@ -26,7 +26,6 @@ router.get('/:id', (req, res) => {
     }
   })
   .catch(err => {
-    console.log(err)
     res.status(500).json({ message: 'Failed to get schemes' });
   });
 });
@@ -56,6 +55,7 @@ router.post('/', (req, res) => {
     res.status(201).json(scheme);
   })
   .catch (err => {
+    console.log(err)
     res.status(500).json({ message: 'Failed to create new scheme' });
   });
 });
@@ -89,7 +89,7 @@ router.put('/:id', (req, res) => {
     if (scheme) {
       Schemes.update(changes, id)
       .then(updatedScheme => {
-        res.json(updatedScheme);
+        res.status(200).json({ message: 'Update Successful', updatedScheme });
       });
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id' });
